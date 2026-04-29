@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Student Dashboard — Submit and track your library complaints." />
+  <title>Dashboard — libraryCare</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+        <div class="logo">🏠 LibraryCare <span>| Student</span></div>
+      <div class="nav-links">
+        <div class="user-badge">
+          <span id="userName">Student</span>
+          <span class="role-tag">Student</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard -->
+  <div class="container dashboard fade-in">
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow">
+      <div class="glass-card stat-card stat-total">
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-label">Total</div>
+      </div>
+      <div class="glass-card stat-card stat-pending">
+        <div class="stat-value" id="statPending">0</div>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="glass-card stat-card stat-progress">
+        <div class="stat-value" id="statProgress">0</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="glass-card stat-card stat-resolved">
+        <div class="stat-value" id="statResolved">0</div>
+        <div class="stat-label">Resolved</div>
+      </div>
+    </div>
+
+    <!-- Header + New Complaint -->
+    <div class="page-header">
+      <div>
+        <h1>My Complaints</h1>
+        <p class="subtitle">Track all your Library issues in one place</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">+ New Complaint</button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-status="" onclick="filterComplaints(this, '')">All</button>
+      <button class="filter-btn" data-status="pending" onclick="filterComplaints(this, 'pending')">Pending</button>
+      <button class="filter-btn" data-status="in-progress" onclick="filterComplaints(this, 'in-progress')">In Progress</button>
+      <button class="filter-btn" data-status="resolved" onclick="filterComplaints(this, 'resolved')">Resolved</button>
+    </div>
+
+    <!-- Complaint Cards -->
+    <div class="complaints-grid" id="complaintsGrid">
+      <div class="loading-overlay"><span class="spinner" style="width:36px;height:36px;border-width:3px"></span></div>
+    </div>
+  </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+  <!-- New Complaint Modal -->
+  <div class="modal-overlay hidden" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="glass-card modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2>New Complaint</h2>
+        <button class="btn btn-ghost btn-icon" onclick="closeModal()">✕</button>
+      </div>
+      <form id="complaintForm" onsubmit="submitComplaint(event)">
+        <div class="form-group">
+          <label for="cTitle">Title</label>
+          <input type="text" id="cTitle" placeholder="Brief title of the issue" required />
+        </div>
+        <div class="form-group">
+          <label for="cCategory">Category</label>
+          <select id="cCategory" required>
+            <option value="">Select Category</option>
+            <option value="Book Damage">Book Damage</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Furniture Chair">Furniture Chair</option>
+            <option value="Cleanliness">Cleanliness</option>
+            <option value="Internet">Internet / WiFi</option>
+            <option value="Security">Security</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cDesc">Description</label>
+          <textarea id="cDesc" placeholder="Describe the issue in detail..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Attach Image (optional)</label>
+          <div class="file-input-wrapper" id="fileWrapper">
+            <span class="file-icon">📷</span>
+            <span class="file-text"><strong>Click to upload</strong> or drag & drop</span>
+            <input type="file" id="cImage" accept="image/*" onchange="showFileName(this)" />
+          </div>
+          <span id="fileName" style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;display:block"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="submitBtn">Submit Complaint</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

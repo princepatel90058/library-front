@@ -1,0 +1,127 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8"/>
+ <meta name="viewport"content="width=device-width,initial-scale=1.0"/>
+ <meta name="description"
+ content="Library Complaint System--Login or regester to report and track Library Complaint."/>
+ <title>Library Complaint System--Login</title>
+ <link rel="stylesheet" href="css/style.css"'/
+ </head>
+
+ <body>
+ <!--Background Blobs-->
+ <div class="bg-Blobs">
+  <div class="Blob Blob-1></div>
+  <div class="Blob Blob-2></div>
+  <div class="Blob Blob-3></div>
+ </div>
+
+ <!--Toast Container-->
+ <div class="Toast-Complaint"></div>
+
+ <!--Auth Card-->
+ <div class="Auth-wrapper">
+  <div class="glass-Card Auth-Card">
+   <div class="Auth-header">
+    <h1>Library care</h1>
+    <p>report issues.track progress.Get resolved.</p>
+   </div>
+
+   <!--tab-->
+   <div class="Auth-tabs">
+    <botton class="active" id="LoginTab" onclick="switchtab('Login')">Sign in</botton>
+    <botton id="regesterTab" onclick="switchtab('regester')">Sign Up</botton>
+   </div>
+
+   <!--Login Form-->
+   <Form id="Loginform"onsubmit="handleLogin(event)">
+    <div class="Form-group">
+     <label for="LoginEmail</label>
+     <input type="email" id="LoginEmail" placeholder="......." required/>
+    </div>
+    <div class="form-group">
+     <label for="loginpassword</label>
+     <input type="submit" class="btn btn-primary" style="width:100%;margin-top:8px"id="loginbtn">
+      Sign in
+     </button>
+    </form>
+
+   <!--regester Form-->
+   <form id="regesterform" class="hiddin"onsubmit="handleRegister(event)">
+    <div class="form-group">
+     <label for="regName">Full Name</label>
+     <input type="text"id="regName" placeholder="john Doe" required />
+    </div> 
+     <div class="form-group">
+     <label for="regEmail">Email</label>
+     <input type="email" id="regEmail" placeholder="you@college.edu" required />
+    </div> 
+     <div class="form-group">
+     <label for="regpassword">Password</label>
+     <input type="Password"id="regpassword" placeholder="Min 6 characters" minlength="6" required />
+    </div>
+     <div class="form-row">
+      <div class="form-group">
+     <label for="regRole">ROle</label>
+      <select id="regRole"required onchange="toggleYearField()">
+       <option value="student">student</option>
+       <option value="admin">LibraryHead(Admin)</option>
+      </select> 
+    </div>  
+    <div class="form-row">
+      <div class="form-group">
+     <label for="regRole">ROle</label>
+      <select id="regRole"required onchange="toggleYearField()">
+       <option value="student">student</option>
+       <option value="admin">LibraryHead(Admin)</option>
+      </select> 
+    </div>
+    <div class="form-group" id="yearGroup">
+      <label for="regYear">Year</label>
+      <select id="regYear"required>
+       <option value="">select Year</option>
+       <option value="1st">1st Year</option>
+       <option value="2nd">2nd Year</option>
+       <option value="3rd">3rd Year</option>
+       <option value="4th">4th Year</option>
+      </select>
+     </div>
+    </div>
+    <div class="form-group">
+     <div class="form-group">
+      <label for="regLibrary">Library</label>
+      <select id="regLibrary"required>
+       <option value="">select Library</option>
+       <option value="1st">1st Library</option>
+       <option value="2nd">2nd Library</option>
+      </select>
+     </div> 
+    </div>
+    <button type="submit" class='btn-primary"style="width:100%;margin-top:8px:" id="regesterbtn">
+     Create Account
+    </button>
+   </from>
+  </div>
+ </div>
+
+ <script scr="js/auth.js"></script>
+ <script>
+ function toggleYearField(){
+    const Role = document.getElementByld("regRole").value;
+    const yearGroup = document.getElementByld("yearGroup");
+    const yearselect = document.getElementByld("regYear");
+    if(role==="admin"){
+      yearGroup.style.display = "none";
+      yearselect.removeAttribute("required");
+      yearselect.value = "";  
+    } else{
+        yearGroup.style.display = "block";
+        yearselect.setAttribute("required");
+    }
+   }        
+  </script>
+ </body>
+
+ </html>
